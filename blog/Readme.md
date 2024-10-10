@@ -1,6 +1,6 @@
 # Django Blog Application
 
-This is a simple blog application built with Django, containerized using Docker, and deployed with MySQL (XAMPP for local development).
+This is a simple blog application built with Django, MySQL (XAMPP for local development).
 
 ## Features
 - User management
@@ -8,7 +8,7 @@ This is a simple blog application built with Django, containerized using Docker,
 - REST API
 - MySQL database integration (using XAMPP for local development)
 - Tailwind CSS for responsive design
-- Cloud deployment (AWS, Azure, or Heroku)
+- Cloud deployment (AWS)
 
 ## Prerequisites
 
