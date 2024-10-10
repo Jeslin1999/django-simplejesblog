@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<!-- Outer container to ensure vertical and horizontal centering -->
+<div class="min-h-screen container flex items-center justify-center bg-gray-100">
+    <!-- Inner container for form, with margin adjustments for better centering -->
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md mx-auto">
+        <form id="signupForm" method="POST">
+            {% csrf_token %}
+            <h3 class="text-2xl font-bold text-center mb-6 ">Sign Up</h3>
+
+            <!-- Username -->
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="username" name="username" placeholder="Enter your name" value="">
+                {% if form.username.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="email" name="email" placeholder="Enter your email" value="">
+                {% if form.email.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label for="password1" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="password1" name="password1" placeholder="Enter your password">
+                {% if form.password1.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" class="block w-full mt-1 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="password2" name="password2" placeholder="Confirm your password">
+                {% if form.password2.errors %}
+                    <div class="text-red-600 text-sm mt-1">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Submit button -->
+            <div class="mt-6">
+                <button type="submit" id="registerButton" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Register
+                </button>
+            </div>
+
+            <!-- Non-field errors -->
+            {% if form.non_field_errors %}
+                <div class="text-red-600 text-sm mt-4">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="text-center mt-4"></div>
+                <p class="text-sm mt-2">
+                    Do you have an account? <a href="{% url 'login' %}" class="text-indigo-600 hover:text-indigo-500">Login</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

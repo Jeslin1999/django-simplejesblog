@@ -1,0 +1,82 @@
+<!-- First Navbar -->
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="https://t3.ftcdn.net/jpg/04/21/84/18/360_F_421841842_dqzyI4XbXt7W0QiIdr1f2EFtz78f6TPa.jpg" class="h-8" alt="Flowbite Logo" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Simple JES Blog</span>
+        </a>
+        
+        <!-- Mobile menu button (hidden on large screens) -->
+        <button type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleDropdown('mobile-menu')">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+
+        <!-- Full menu visible on larger screens -->
+        {% if not user.is_authenticated %}
+        <div class="hidden lg:flex items-center space-x-6 rtl:space-x-reverse">
+            <a href="{% url 'signup' %}" class="text-sm text-gray-500 dark:text-white hover:underline">Signup</a>
+            <a href="{% url 'login' %}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</a>
+        </div>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <div class="hidden lg:flex items-center space-x-6 rtl:space-x-reverse">
+            <a href="{% url 'create_post' %}" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Create your blog</a>
+
+            <!-- User profile button -->
+            <div class="relative flex items-center space-x-3 rtl:space-x-reverse">
+                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" aria-haspopup="true" onclick="toggleDropdown('user-dropdown')">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full" src="https://clipground.com/images/default-image-icon-png-20.jpg" alt="user photo">
+                </button>
+
+                <!-- Dropdown menu -->
+                <div class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 dark:bg-gray-700" id="user-dropdown" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+                    <ul class="py-1">
+                        <li><a href="{% url 'base-account' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Home</a></li>
+                        <li><a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profile</a></li>
+                        <li><a href="{% url 'create_post' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Create Post</a></li>
+                        <li><a href="{% url 'view_posts' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">View Post</a></li>
+                        <li><a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="lg:hidden hidden" id="mobile-menu">
+        <ul class="space-y-1 px-2 pt-2 pb-3">
+            <li><a href="{% url 'home' %}" class="block text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 p-2">Home</a></li>
+            <div class="hidden lg:flex items-center space-x-6 rtl:space-x-reverse">
+                <a href="{% url 'signup' %}" class="text-sm text-gray-500 dark:text-white hover:underline">Signup</a>
+                <a href="{% url 'login' %}" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Login</a>
+            </div>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'create_post' %}" class="block text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 p-2">Create your blog</a></li>
+            <li><a href="{% url 'profile' %}" class="block text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 p-2">Profile</a></li>
+            <li><a href="{% url 'view_posts' %}" class="block text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 p-2">View Posts</a></li>
+            <li><a href="{% url 'logout' %}" class="block text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 p-2">Sign out</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<script>
+    function toggleDropdown(menuId) {
+        const menu = document.getElementById(menuId);
+        menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function(event) {
+        const userMenuButton = document.getElementById('user-menu-button');
+        const dropdown = document.getElementById('user-dropdown');
+        if (!userMenuButton.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
