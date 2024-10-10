@@ -18,4 +18,4 @@ This is a simple blog application built with Django, containerized using Docker,
 
 1. Clone the repository:
   
-   git clone https://github.com/yourusername/django-blog.git
+   https://github.com/Jeslin1999/django-simplejesblog.git
